@@ -1,3 +1,69 @@
+## 環境構築
+
+### 1. 環境変数の設定
+
+```sh
+# 環境変数用のファイル作成
+$ cp .envrc.example .envrc
+$ direnv allow
+```
+
+ローカル環境で direnv を使用する場合:
+```sh
+$ brew install direnv  # macOS
+```
+
+### 2. Docker コンテナの起動
+
+```sh
+$ docker compose up -d
+
+# コンテナの作り直しが必要な場合
+$ source ./remake_container.sh
+```
+
+### 3. 開発依存関係の管理（taskipy）
+
+このプロジェクトでは taskipy を使用して開発依存関係を管理しています。
+
+#### ロックファイルの生成
+
+pyproject.toml を編集した後、以下のコマンドで requirements-dev.txt を再生成します:
+
+```sh
+$ docker compose run --rm backend uv run task lock_dev
+```
+
+このコマンドは `uv pip compile` を実行し、pyproject.toml の `[project.optional-dependencies] dev` セクションから requirements-dev.txt を生成します。
+
+#### 開発依存関係のインストール
+
+```sh
+$ docker compose run --rm backend uv run task install_dev
+```
+
+#### 依存関係の追加方法
+
+1. pyproject.toml の `[project.optional-dependencies] dev` セクションにパッケージを追加
+2. `task lock_dev` を実行して requirements-dev.txt を再生成
+3. `uv lock` を実行して uv.lock を更新
+
+```sh
+# 例: 新しいパッケージを追加した後
+$ docker compose run --rm backend uv lock
+$ docker compose run --rm backend uv run task lock_dev
+```
+
+### 4. アプリケーションの起動
+
+```sh
+$ docker compose up -d
+```
+
+アプリケーションURL: http://localhost:8000/web/
+
+---
+
 ### Command
 
 ```sh
