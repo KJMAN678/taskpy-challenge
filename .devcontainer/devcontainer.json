@@ -3,7 +3,7 @@
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
   "service": "backend",
   "workspaceFolder": "/app",
-  "postCreateCommand": "pip install -r requirements-dev.txt",
+  "postCreateCommand": "uv sync --extra dev && uv run task lock_dev && uv run task install_dev",
   "customizations": {
     "vscode": {
       "extensions": [

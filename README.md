@@ -6,7 +6,10 @@
 2. `.envrc.example` を `.envrc` にコピーし、環境変数を設定
 3. VSCode でプロジェクトを開き、「Reopen in Container」を選択
 
-Dev Container 起動時に `pip install -r requirements-dev.txt` が自動実行され、開発依存関係がインストールされます。
+Dev Container 起動時に以下が自動実行されます：
+1. `uv sync --extra dev` - uv で開発依存関係をインストール
+2. `uv run task lock_dev` - taskipy で requirements-dev.txt を生成
+3. `uv run task install_dev` - pip で requirements-dev.txt からインストール
 
 ```sh
 # コンテナ内でアプリケーションを起動

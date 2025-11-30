@@ -29,7 +29,7 @@ link-mode = "copy"
 
 [tool.taskipy.tasks]
 lock_dev = { cmd = "uv pip compile -p 3.12 -U -o requirements-dev.txt --extra dev pyproject.toml", help = "Create lockfile for dev" }
-install_dev = { cmd = "pip install --user -r requirements-dev.txt", help = "Install dependencies for dev" }
+install_dev = { cmd = "pip install -r requirements-dev.txt", help = "Install dependencies for dev" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
