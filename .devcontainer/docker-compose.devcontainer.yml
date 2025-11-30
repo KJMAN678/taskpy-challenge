@@ -1,5 +1,3 @@
 services:
   backend:
-    volumes:
-      - ..:/app:cached
     command: sleep infinity
