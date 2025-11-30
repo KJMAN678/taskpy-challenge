@@ -1,6 +1,22 @@
 ## 環境構築
 
-### 1. 環境変数の設定
+### 方法 A: VSCode Dev Container を使用する場合（推奨）
+
+1. VSCode で「Dev Containers」拡張機能をインストール
+2. `.envrc.example` を `.envrc` にコピーし、環境変数を設定
+3. VSCode でプロジェクトを開き、「Reopen in Container」を選択
+
+Dev Container 起動時に `pip install -r requirements-dev.txt` が自動実行され、開発依存関係がインストールされます。
+
+```sh
+# コンテナ内でアプリケーションを起動
+$ python manage.py migrate
+$ python manage.py runserver 0.0.0.0:8000
+```
+
+### 方法 B: Docker Compose を直接使用する場合
+
+#### 1. 環境変数の設定
 
 ```sh
 # 環境変数用のファイル作成
@@ -13,7 +29,7 @@ $ direnv allow
 $ brew install direnv  # macOS
 ```
 
-### 2. Docker コンテナの起動
+#### 2. Docker コンテナの起動
 
 ```sh
 $ docker compose up -d
