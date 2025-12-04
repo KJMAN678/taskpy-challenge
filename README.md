@@ -3,7 +3,7 @@
 ### 方法 A: VSCode Dev Container を使用する場合（推奨）
 
 1. VSCode で「Dev Containers」拡張機能をインストール
-2. `.envrc.example` を `.envrc` にコピーし、環境変数を設定
+2. `.env.example` を `.env` にコピーし、環境変数を設定
 3. VSCode でプロジェクトを開き、「Reopen in Container」を選択
 
 Dev Container 起動時に以下が自動実行されます：
@@ -23,13 +23,8 @@ $ python manage.py runserver 0.0.0.0:8000
 
 ```sh
 # 環境変数用のファイル作成
-$ cp .envrc.example .envrc
-$ direnv allow
-```
-
-ローカル環境で direnv を使用する場合:
-```sh
-$ brew install direnv  # macOS
+$ touch .env
+$ cp .env.example .env
 ```
 
 #### 2. Docker コンテナの起動

@@ -3,7 +3,7 @@
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
   "service": "backend",
   "workspaceFolder": "/app",
-  "postCreateCommand": "apt-get update && apt-get install -y direnv && direnv allow . && eval \"$(direnv export bash)\" && uv sync --extra dev && uv run task lock_dev && uv run task install_dev",
+  "postAttachCommand": "uv sync --extra dev || true && uv run task lock_dev || true && uv run task install_dev || true",
   "customizations": {
     "vscode": {
       "extensions": [
