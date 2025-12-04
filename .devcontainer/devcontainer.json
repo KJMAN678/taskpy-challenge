@@ -1,0 +1,35 @@
+{
+  "name": "Django Project",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
+  "service": "backend",
+  "workspaceFolder": "/app",
+  "postAttachCommand": "uv sync --extra dev || true && uv run task lock_dev || true && uv run task install_dev || true",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "monosans.djlint"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "editor.formatOnSave": true,
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        }
+      }
+    }
+  },
+  "forwardPorts": [8000, 5432],
+  "remoteEnv": {
+    "DJANGO_SECRET_KEY": "${localEnv:DJANGO_SECRET_KEY}",
+    "DJANGO_SUPERUSER_PASSWORD": "${localEnv:DJANGO_SUPERUSER_PASSWORD}",
+    "DJANGO_SUPERUSER_USERNAME": "${localEnv:DJANGO_SUPERUSER_USERNAME}",
+    "DJANGO_SUPERUSER_EMAIL": "${localEnv:DJANGO_SUPERUSER_EMAIL}",
+    "POSTGRES_DB": "${localEnv:POSTGRES_DB}",
+    "POSTGRES_USER": "${localEnv:POSTGRES_USER}",
+    "POSTGRES_PASSWORD": "${localEnv:POSTGRES_PASSWORD}"
+  }
+}

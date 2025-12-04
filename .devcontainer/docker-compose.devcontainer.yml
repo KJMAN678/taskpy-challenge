@@ -1,0 +1,9 @@
+services:
+  backend:
+    env_file:
+      - devcontainer.env
+    command: sleep infinity
+
+  db:
+    env_file:
+      - devcontainer.env
